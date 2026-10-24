@@ -1,0 +1,564 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorCart - Online Shopping</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff8f1;
+    color: #29243d;
+}
+
+/* Header */
+header {
+    background: #542583;
+    color: white;
+    padding: 20px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    color: #ffd166;
+    font-size: 28px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ffd166;
+}
+
+/* Hero Banner */
+.banner {
+    text-align: center;
+    padding: 75px 20px;
+    background: linear-gradient(120deg, #ff8066, #ffc56b, #ffe6a7);
+    color: #382044;
+}
+
+.banner h1 {
+    font-size: clamp(32px, 5vw, 48px);
+    margin-bottom: 15px;
+}
+
+.banner p {
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+.btn {
+    display: inline-block;
+    background: #542583;
+    color: white;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #e94e77;
+    transform: translateY(-3px);
+}
+
+/* Categories */
+.categories {
+    padding: 35px 5%;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    color: #542583;
+    margin-bottom: 25px;
+}
+
+.category-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.category-links a {
+    background: white;
+    color: #542583;
+    border: 1px solid #e6d2f4;
+    padding: 12px 22px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.category-links a:hover {
+    background: #542583;
+    color: white;
+}
+
+/* Product Grid */
+.products {
+    padding: 35px 6% 60px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.product {
+    position: relative;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #f0e4f2;
+    box-shadow: 0 5px 15px #54258312;
+    transition: 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 12px 25px #54258325;
+}
+
+.product img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    background: #f2e9f5;
+}
+
+.product-info {
+    padding: 17px;
+}
+
+.product h3 {
+    color: #542583;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.description {
+    color: #6b6473;
+    font-size: 14px;
+    min-height: 36px;
+    margin-bottom: 10px;
+}
+
+.rating {
+    color: #f2a900;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.price {
+    color: #e94e77;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.old-price {
+    color: #999;
+    font-size: 13px;
+    text-decoration: line-through;
+    margin-left: 5px;
+}
+
+.discount {
+    display: inline-block;
+    background: #d9f7df;
+    color: #17783a;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+.buy-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: #542583;
+    color: white;
+    padding: 11px;
+    border-radius: 8px;
+    margin-top: 13px;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    background: #e94e77;
+}
+
+.tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #e94e77;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Offers */
+.offer {
+    text-align: center;
+    padding: 45px 20px;
+    background: linear-gradient(120deg, #542583, #8d3ba5);
+    color: white;
+}
+
+.offer h2 {
+    color: #ffd166;
+    margin-bottom: 12px;
+}
+
+.offer p {
+    margin-bottom: 22px;
+}
+
+.offer .btn {
+    background: #ffd166;
+    color: #382044;
+    font-weight: bold;
+}
+
+/* Footer */
+footer {
+    background: #25133b;
+    color: white;
+    padding: 30px 15px;
+    text-align: center;
+    line-height: 2;
+}
+
+footer a {
+    color: #ffd166;
+    text-decoration: none;
+}
+
+/* Responsive Layout */
+@media (max-width: 1000px) {
+    .product-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav {
+        line-height: 2.2;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .product img {
+        height: 150px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .products {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+}
+
+@media (max-width: 380px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .product img {
+        height: 220px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1 class="logo">ZARA 🛍️</h1>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#offers">Offers</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="banner" id="home">
+    <h1>Big Style. Better Prices!</h1>
+    <p>Discover your favourite products at amazing prices.</p>
+    <a href="#products" class="btn">Shop Now →</a>
+</section>
+
+<section class="categories" id="categories">
+    <h2>Explore Categories</h2>
+    <div class="category-links">
+        <a href="#electronics">📱 Electronics</a>
+        <a href="#fashion">👕 Fashion</a>
+        <a href="#footwear">👟 Footwear</a>
+        <a href="#accessories">⌚ Accessories</a>
+        <a href="#home-items">🏠 Home</a>
+        <a href="#beauty">✨ Beauty</a>
+    </div>
+</section>
+
+<section class="products" id="products">
+    <h2>✨ Trending Products</h2>
+
+    <div class="product-grid">
+
+        <div class="product" id="electronics">
+            <span class="tag">BESTSELLER</span>
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80" alt="Wireless headphones">
+            <div class="product-info">
+                <h3>Wireless Headphones</h3>
+                <p class="rating">★★★★★ 4.8</p>
+                <p class="description">Clear sound and comfortable fit.</p>
+                <p class="price">₹1,499 <span class="old-price">₹2,499</span></p>
+                <span class="discount">40% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Wireless%20Headphones">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product" id="fashion">
+            <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=600&q=80" alt="Cotton T-shirt">
+            <div class="product-info">
+                <h3>Classic T-Shirt</h3>
+                <p class="rating">★★★★★ 4.6</p>
+                <p class="description">Soft cotton casual wear.</p>
+                <p class="price">₹499 <span class="old-price">₹799</span></p>
+                <span class="discount">37% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Classic%20T-Shirt">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product" id="accessories">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Wristwatch">
+            <div class="product-info">
+                <h3>Classic Wristwatch</h3>
+                <p class="rating">★★★★★ 4.7</p>
+                <p class="description">Elegant watch for every occasion.</p>
+                <p class="price">₹999 <span class="old-price">₹1,499</span></p>
+                <span class="discount">33% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Classic%20Wristwatch">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product" id="footwear">
+            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="Red sports shoes">
+            <div class="product-info">
+                <h3>Sports Shoes</h3>
+                <p class="rating">★★★★★ 4.5</p>
+                <p class="description">Lightweight shoes for everyday use.</p>
+                <p class="price">₹1,299 <span class="old-price">₹1,999</span></p>
+                <span class="discount">35% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Sports%20Shoes">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Camera">
+            <div class="product-info">
+                <h3>Digital Camera</h3>
+                <p class="rating">★★★★★ 4.7</p>
+                <p class="description">Capture your favourite memories.</p>
+                <p class="price">₹5,999 <span class="old-price">₹7,499</span></p>
+                <span class="discount">20% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Digital%20Camera">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?auto=format&fit=crop&w=600&q=80" alt="Smartwatch">
+            <div class="product-info">
+                <h3>Smartwatch</h3>
+                <p class="rating">★★★★☆ 4.4</p>
+                <p class="description">A smart companion for daily life.</p>
+                <p class="price">₹1,799 <span class="old-price">₹2,499</span></p>
+                <span class="discount">28% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Smartwatch">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=600&q=80" alt="Earphones">
+            <div class="product-info">
+                <h3>Premium Earphones</h3>
+                <p class="rating">★★★★★ 4.5</p>
+                <p class="description">Enjoy music wherever you go.</p>
+                <p class="price">₹699 <span class="old-price">₹999</span></p>
+                <span class="discount">30% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Premium%20Earphones">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80" alt="Fashion handbag">
+            <div class="product-info">
+                <h3>Fashion Handbag</h3>
+                <p class="rating">★★★★★ 4.6</p>
+                <p class="description">A stylish bag for everyday outings.</p>
+                <p class="price">₹899 <span class="old-price">₹1,299</span></p>
+                <span class="discount">31% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Fashion%20Handbag">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80" alt="Fashion outfit">
+            <div class="product-info">
+                <h3>Fashion Outfit</h3>
+                <p class="rating">★★★★☆ 4.3</p>
+                <p class="description">Modern style for special occasions.</p>
+                <p class="price">₹1,199 <span class="old-price">₹1,799</span></p>
+                <span class="discount">33% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Fashion%20Outfit">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80" alt="Luxury wristwatch">
+            <div class="product-info">
+                <h3>Luxury Watch</h3>
+                <p class="rating">★★★★★ 4.8</p>
+                <p class="description">A premium look with classic styling.</p>
+                <p class="price">₹1,599 <span class="old-price">₹2,299</span></p>
+                <span class="discount">30% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Luxury%20Watch">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=600&q=80" alt="Beauty skincare products">
+            <div class="product-info">
+                <h3>Beauty Essentials</h3>
+                <p class="rating">★★★★☆ 4.4</p>
+                <p class="description">Daily skincare and beauty essentials.</p>
+                <p class="price">₹599 <span class="old-price">₹899</span></p>
+                <span class="discount">33% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Beauty%20Essentials">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80" alt="Modern home chair">
+            <div class="product-info">
+                <h3>Modern Home Decor</h3>
+                <p class="rating">★★★★★ 4.6</p>
+                <p class="description">Add a fresh touch to your home.</p>
+                <p class="price">₹1,899 <span class="old-price">₹2,499</span></p>
+                <span class="discount">24% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Modern%20Home%20Decor">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=600&q=80" alt="Sunglasses">
+            <div class="product-info">
+                <h3>Stylish Sunglasses</h3>
+                <p class="rating">★★★★☆ 4.2</p>
+                <p class="description">Complete your look with trendy shades.</p>
+                <p class="price">₹399 <span class="old-price">₹699</span></p>
+                <span class="discount">43% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Stylish%20Sunglasses">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=600&q=80" alt="Home furniture">
+            <div class="product-info">
+                <h3>Comfort Chair</h3>
+                <p class="rating">★★★★★ 4.5</p>
+                <p class="description">Comfortable design for your room.</p>
+                <p class="price">₹2,499 <span class="old-price">₹3,499</span></p>
+                <span class="discount">29% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Comfort%20Chair">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Gift watch">
+            <div class="product-info">
+                <h3>Gift Collection</h3>
+                <p class="rating">★★★★☆ 4.3</p>
+                <p class="description">Find a special gift for someone you love.</p>
+                <p class="price">₹799 <span class="old-price">₹1,199</span></p>
+                <span class="discount">33% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Gift%20Collection">Order Now</a>
+            </div>
+        </div>
+
+        <div class="product">
+            <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" alt="Women's footwear">
+            <div class="product-info">
+                <h3>Elegant Footwear</h3>
+                <p class="rating">★★★★★ 4.6</p>
+                <p class="description">Fashionable footwear for every day.</p>
+                <p class="price">₹899 <span class="old-price">₹1,399</span></p>
+                <span class="discount">36% OFF</span>
+                <a class="buy-btn" href="mailto:shop@example.com?subject=Elegant%20Footwear">Order Now</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="offer" id="offers">
+    <h2>🎉 Mega Shopping Festival</h2>
+    <p>Discover special prices on selected products.</p>
+    <a href="#products" class="btn">Explore Products</a>
+</section>
+
+<section class="categories" id="contact">
+    <h2>Contact ColorCart</h2>
+    <p>Email: shop@example.com</p>
+    <p>Customer Support: Monday to Saturday</p>
+    <p>Happy Shopping! 💜</p>
+</section>
+
+<footer>
+    <h3>ColorCart 🛍️</h3>
+    <p>Your favourite products, all in one place.</p>
+    <p><a href="#home">Back to Top ↑</a></p>
+    <p>© 2026 ColorCart | Designed with HTML and CSS</p>
+</footer>
+
+</body>
+</html>

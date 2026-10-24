@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Siddardha | Portfolio</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b1020;
+            color: white;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #151b35;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h2 {
+            color: #52f2e3;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 8px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #52f2e3;
+        }
+
+        .hero {
+            padding: 85px 8%;
+            text-align: center;
+            background: linear-gradient(135deg, #20245c, #701c82, #102f52);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 6vw, 52px);
+            margin-bottom: 12px;
+        }
+
+        .hero h1 span {
+            color: #52f2e3;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: 0 auto 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #52f2e3;
+            color: #10152b;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ffcf5c;
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 55px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            color: #52f2e3;
+            font-size: 30px;
+            margin-bottom: 30px;
+        }
+
+        .about {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: #171e38;
+            border: 1px solid #343e67;
+            border-radius: 16px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: #52f2e3;
+            box-shadow: 0 10px 25px #0005;
+        }
+
+        .card h3 {
+            color: #ffcf5c;
+            margin-bottom: 10px;
+        }
+
+        .skill {
+            display: inline-block;
+            background: #27365b;
+            color: #52f2e3;
+            padding: 10px 18px;
+            margin: 6px;
+            border-radius: 20px;
+        }
+
+        .contact {
+            text-align: center;
+            background: #151b35;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #080c18;
+            color: #b9c2dd;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 5px;
+            }
+
+            section {
+                padding: 40px 6%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+    
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero" id="home">
+        <h1>Hello, I'm <span>Sai Siddardha</span></h1>
+        <h3>B.Tech CSE Student | Future Software Developer</h3>
+        <p>
+            Welcome to my personal portfolio. I enjoy learning
+            programming, designing websites and exploring technology.
+        </p>
+        <a href="#about" class="btn">Explore My Portfolio</a>
+    </div>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about">
+            <p>
+                I am a first-year B.Tech Computer Science Engineering
+                student at Dr. RVR NRI University. I am passionate about
+                technology, problem-solving and web development.
+                My goal is to become a skilled software developer.
+            </p>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>B.Tech CSE</h3>
+                <p>Dr. RVR NRI University</p>
+                <p>Currently Studying</p>
+            </div>
+            <div class="card">
+                <h3>Intermediate</h3>
+                <p>Sri Chaitanya Junior College</p>
+                <p>2025–2026</p>
+            </div>
+            <div class="card">
+                <h3>SSC</h3>
+                <p>Vijaya High School</p>
+                <p>2023–2024</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">My Skills</h2>
+        <div style="text-align:center;">
+            <span class="skill">HTML</span>
+            <span class="skill">CSS</span>
+            <span class="skill">Python Basics</span>
+            <span class="skill">Problem Solving</span>
+            <span class="skill">Communication</span>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">My Projects</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Personal Portfolio</h3>
+                <p>A responsive website showcasing my profile and skills.</p>
+            </div>
+            <div class="card">
+                <h3>Online Shopping</h3>
+                <p>A colourful shopping interface with product cards.</p>
+            </div>
+            <div class="card">
+                <h3>College Webpage</h3>
+                <p>A webpage presenting college information and facilities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Hobbies & Achievements</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Hobbies</h3>
+                <p>Learning technology, listening to music and exploring new ideas.</p>
+            </div>
+            <div class="card">
+                <h3>Achievements</h3>
+                <p>Developing academic projects and improving my programming skills.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact Me</h2>
+        <p>Interested in collaborating on a project?</p>
+        <p>Email: your-email@example.com</p>
+        <br>
+        <a href="mailto:your-email@example.com" class="btn">
+            Send Email
+        </a>
+    </section>
+
+    <footer>
+        <p>© 2026 Sai Siddardha | Personal Portfolio</p>
+        <p>Designed with HTML and CSS</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vinland Electronics Store</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #fffaf3;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #39251f, #6b3828);
+            color: white;
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            font-family: Georgia, serif;
+            margin: 0;
+            font-size: 42px;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: #ead8c3;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            background: #56382d;
+            padding: 16px 10px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 13px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffd28a;
+        }
+
+        .hero {
+            background: linear-gradient(
+                rgba(234, 216, 195, 0.91),
+                rgba(234, 216, 195, 0.91)
+            ),
+            url("https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .hero h2 {
+            font-family: Georgia, serif;
+            font-size: 46px;
+            color: #39251f;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+        section {
+            padding: 45px 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #6b3828;
+            font-family: Georgia, serif;
+            font-size: 32px;
+        }
+
+        section > p {
+            line-height: 1.7;
+        }
+
+        button {
+            background: #6b3828;
+            color: white;
+            border: none;
+            padding: 13px 23px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #39251f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px #0002;
+        }
+
+        .hero button {
+            margin-top: 15px;
+            padding: 15px 28px;
+        }
+
+        .search {
+            background: #ead8c3;
+            padding: 22px 15px;
+        }
+
+        .search input {
+            max-width: 550px;
+            margin: 0;
+            background: white;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .product {
+            background: white;
+            width: 250px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #39251f15;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .product:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 10px 25px #39251f25;
+        }
+
+        .product img {
+            width: 100%;
+            height: 175px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product h3 {
+            color: #39251f;
+            font-family: Georgia, serif;
+            font-size: 20px;
+        }
+
+        .product p {
+            line-height: 1.6;
+        }
+
+        .price {
+            color: #16804a;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .old-price {
+            color: #888;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .discount {
+            display: inline-block;
+            background: #f1e3d4;
+            color: #6b3828;
+            padding: 6px 9px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .rating {
+            color: #b87919;
+        }
+
+        .specs {
+            background: #fffaf3;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .product button {
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .offer {
+            background: #f1e3d4;
+            padding: 30px 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+        }
+
+        .offer h2 {
+            color: #39251f;
+        }
+
+        #cartMessage {
+            color: #16804a;
+            font-weight: bold;
+            line-height: 1.8;
+        }
+
+        .comparison {
+            overflow-x: auto;
+            margin: 25px auto;
+            max-width: 1000px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 15px #39251f12;
+        }
+
+        th {
+            background: #56382d;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 14px;
+            border: 1px solid #ead8c3;
+        }
+
+        tr:nth-child(even) {
+            background: #fff5e9;
+        }
+
+        .details {
+            background: #f1e3d4;
+        }
+
+        .detail-card {
+            background: white;
+            max-width: 700px;
+            margin: 25px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #39251f15;
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .detail-card h3 {
+            color: #39251f;
+            font-family: Georgia, serif;
+        }
+
+        .review {
+            background: white;
+            max-width: 550px;
+            margin: 20px auto;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #39251f15;
+            line-height: 1.8;
+        }
+
+        .review strong {
+            color: #6b3828;
+        }
+
+        form {
+            max-width: 450px;
+            margin: 25px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px #39251f18;
+            text-align: left;
+        }
+
+        label {
+            color: #56382d;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 18px;
+            border: 1px solid #d7c5b2;
+            border-radius: 6px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            background: #fffdf9;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #6b3828;
+            box-shadow: 0 0 5px #6b382833;
+        }
+
+        footer {
+            background: #39251f;
+            color: white;
+            padding: 30px 15px;
+            text-align: center;
+        }
+
+        footer h3 {
+            font-family: Georgia, serif;
+            font-size: 27px;
+        }
+
+        footer p {
+            line-height: 1.7;
+        }
+
+        .footer-line {
+            color: #ead8c3;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 32px;
+            }
+
+            nav {
+                position: static;
+                line-height: 2.5;
+            }
+
+            nav a {
+                display: inline-block;
+                margin: 4px 8px;
+            }
+
+            .hero {
+                padding: 55px 15px;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 27px;
+            }
+
+            .product {
+                width: 100%;
+                max-width: 340px;
+            }
+
+            section {
+                padding: 35px 15px;
+            }
+
+            .comparison {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 9px;
+            }
+
+            form {
+                padding: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Nexland Electronics</h1>
+        <p>Smart Technology • Premium Quality • Great Prices</p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#comparison">Compare</a>
+        <a href="#offers">Offers</a>
+        <a href="#contact">Contact</a>
+        <a href="#products">Cart (<span id="cartCount">0</span>)</a>
+    </nav>
+
+    <div class="search">
+        <input type="text" id="searchBox"
+               placeholder="Search laptops, smartphones, headphones...">
+    </div>
+
+    <div class="hero" id="home">
+        <h2>Upgrade Your Digital World</h2>
+        <p>Discover powerful laptops, smartphones, audio devices, and smart accessories.</p>
+        <p><strong>Innovation • Performance • Everyday Convenience</strong></p>
+        <a href="#products">
+            <button>Explore Products</button>
+        </a>
+    </div>
+
+    <section id="categories">
+        <h2>Shop by Category</h2>
+        <p>Choose a category to explore our electronics collection.</p>
+
+        <div class="categories">
+            <button onclick="filterProducts('all')">All Products</button>
+            <button onclick="filterProducts('laptops')">Laptops</button>
+            <button onclick="filterProducts('phones')">Smartphones</button>
+            <button onclick="filterProducts('audio')">Audio</button>
+            <button onclick="filterProducts('accessories')">Accessories</button>
+            <button onclick="filterProducts('smart')">Smart Devices</button>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2>Our Electronics Collection</h2>
+        <p>Explore specifications, prices, and special discounts.</p>
+
+        <div class="products" id="productList">
+
+            <div class="product" data-category="laptops">
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="Everyday laptop">
+                <p><span class="discount">15% OFF</span></p>
+                <h3>Everyday Laptop</h3>
+                <p>Reliable laptop for study, office work, and browsing.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.4)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Processor: Intel Core i5<br>
+                    RAM: 16 GB<br>
+                    Storage: 512 GB SSD<br>
+                    Display: 15.6-inch
+                </div>
+                <p><span class="price">₹52,999</span><span class="old-price">₹61,999</span></p>
+                <button onclick="addToCart('Everyday Laptop')">Add to Cart</button>
+                <button onclick="showDetails('Everyday Laptop', 'Intel Core i5, 16 GB RAM, 512 GB SSD, 15.6-inch display. Suitable for study, productivity, and everyday use.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="laptops">
+                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=500&q=80" alt="Premium laptop">
+                <p><span class="discount">12% OFF</span></p>
+                <h3>Premium Laptop</h3>
+                <p>Elegant laptop for multitasking and professional work.</p>
+                <p class="rating">★ ★ ★ ★ ★ (4.7)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Processor: Intel Core Ultra 7<br>
+                    RAM: 16 GB<br>
+                    Storage: 1 TB SSD<br>
+                    Display: 14-inch
+                </div>
+                <p><span class="price">₹79,999</span><span class="old-price">₹90,999</span></p>
+                <button onclick="addToCart('Premium Laptop')">Add to Cart</button>
+                <button onclick="showDetails('Premium Laptop', 'Intel Core Ultra 7, 16 GB RAM, 1 TB SSD, 14-inch display. Designed for productivity and multitasking.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="laptops">
+                <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=80" alt="Gaming laptop">
+                <p><span class="discount">18% OFF</span></p>
+                <h3>Gaming Laptop</h3>
+                <p>Performance-focused laptop for gaming and creative tasks.</p>
+                <p class="rating">★ ★ ★ ★ ★ (4.8)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Processor: Intel Core i7<br>
+                    RAM: 16 GB<br>
+                    Storage: 1 TB SSD<br>
+                    Graphics: Dedicated GPU
+                </div>
+                <p><span class="price">₹94,999</span><span class="old-price">₹1,15,999</span></p>
+                <button onclick="addToCart('Gaming Laptop')">Add to Cart</button>
+                <button onclick="showDetails('Gaming Laptop', 'Intel Core i7, 16 GB RAM, 1 TB SSD, dedicated graphics. Intended for gaming and creative workloads. Exact GPU varies by model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="laptops">
+                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=500&q=80" alt="Student laptop">
+                <p><span class="discount">10% OFF</span></p>
+                <h3>Student Laptop</h3>
+                <p>A practical option for classes, assignments, and projects.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.2)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Processor: Intel Core i3<br>
+                    RAM: 8 GB<br>
+                    Storage: 512 GB SSD<br>
+                    Display: 15.6-inch
+                </div>
+                <p><span class="price">₹34,999</span><span class="old-price">₹38,999</span></p>
+                <button onclick="addToCart('Student Laptop')">Add to Cart</button>
+                <button onclick="showDetails('Student Laptop', 'Intel Core i3, 8 GB RAM, 512 GB SSD, 15.6-inch display. Suitable for everyday student workloads.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="phones">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Modern smartphone">
+                <p><span class="discount">15% OFF</span></p>
+                <h3>Modern Smartphone</h3>
+                <p>Enjoy photography, apps, video, and daily communication.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.5)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Display: 6.5-inch<br>
+                    RAM: 8 GB<br>
+                    Storage: 128 GB<br>
+                    Camera: Multi-camera
+                </div>
+                <p><span class="price">₹19,999</span><span class="old-price">₹23,499</span></p>
+                <button onclick="addToCart('Modern Smartphone')">Add to Cart</button>
+                <button onclick="showDetails('Modern Smartphone', '6.5-inch display, 8 GB RAM, 128 GB storage, multi-camera system. Example specifications; actual models differ.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="phones">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=500&q=80" alt="Premium smartphone">
+                <p><span class="discount">10% OFF</span></p>
+                <h3>Premium Smartphone</h3>
+                <p>A premium-looking phone for entertainment and photography.</p>
+                <p class="rating">★ ★ ★ ★ ★ (4.8)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Display: AMOLED<br>
+                    RAM: 12 GB<br>
+                    Storage: 256 GB<br>
+                    Network: 5G
+                </div>
+                <p><span class="price">₹39,999</span><span class="old-price">₹44,499</span></p>
+                <button onclick="addToCart('Premium Smartphone')">Add to Cart</button>
+                <button onclick="showDetails('Premium Smartphone', 'AMOLED display, 12 GB RAM, 256 GB storage, 5G connectivity. Example specifications; actual models differ.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="phones">
+                <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=500&q=80" alt="Budget smartphone">
+                <p><span class="discount">20% OFF</span></p>
+                <h3>Budget Smartphone</h3>
+                <p>Everyday communication and entertainment at a lower price.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.1)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Display: 6.5-inch<br>
+                    RAM: 6 GB<br>
+                    Storage: 128 GB<br>
+                    Battery: Large capacity
+                </div>
+                <p><span class="price">₹11,999</span><span class="old-price">₹14,999</span></p>
+                <button onclick="addToCart('Budget Smartphone')">Add to Cart</button>
+                <button onclick="showDetails('Budget Smartphone', '6.5-inch display, 6 GB RAM, 128 GB storage, large-capacity battery. Example specifications.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="phones">
+                <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?auto=format&fit=crop&w=500&q=80" alt="Compact smartphone">
+                <p><span class="discount">8% OFF</span></p>
+                <h3>Compact Smartphone</h3>
+                <p>A convenient phone design for daily use and travel.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.3)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Display: 6.1-inch<br>
+                    RAM: 8 GB<br>
+                    Storage: 128 GB<br>
+                    Connectivity: 5G
+                </div>
+                <p><span class="price">₹27,499</span><span class="old-price">₹29,999</span></p>
+                <button onclick="addToCart('Compact Smartphone')">Add to Cart</button>
+                <button onclick="showDetails('Compact Smartphone', '6.1-inch display, 8 GB RAM, 128 GB storage, 5G connectivity. Example specifications.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="audio">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=500&q=80" alt="Wireless headphones">
+                <p><span class="discount">25% OFF</span></p>
+                <h3>Wireless Headphones</h3>
+                <p>Comfortable wireless listening for music and videos.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.4)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Connection: Bluetooth<br>
+                    Design: Over-ear<br>
+                    Microphone: Included<br>
+                    Use: Music and calls
+                </div>
+                <p><span class="price">₹1,499</span><span class="old-price">₹1,999</span></p>
+                <button onclick="addToCart('Wireless Headphones')">Add to Cart</button>
+                <button onclick="showDetails('Wireless Headphones', 'Bluetooth over-ear headphones with a microphone for music and calls. Battery life and codecs depend on the model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="audio">
+                <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?auto=format&fit=crop&w=500&q=80" alt="Bluetooth speaker">
+                <p><span class="discount">20% OFF</span></p>
+                <h3>Bluetooth Speaker</h3>
+                <p>Portable audio for home, travel, and outdoor activities.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.3)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Connection: Bluetooth<br>
+                    Design: Portable<br>
+                    Audio: Stereo-style playback<br>
+                    Use: Indoor and outdoor
+                </div>
+                <p><span class="price">₹1,999</span><span class="old-price">₹2,499</span></p>
+                <button onclick="addToCart('Bluetooth Speaker')">Add to Cart</button>
+                <button onclick="showDetails('Bluetooth Speaker', 'Portable Bluetooth speaker for music playback. Sound output and battery life depend on the model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="audio">
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=500&q=80" alt="Wireless earbuds">
+                <p><span class="discount">18% OFF</span></p>
+                <h3>Wireless Earbuds</h3>
+                <p>Compact earbuds for commuting, calls, and workouts.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.2)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Connection: Bluetooth<br>
+                    Design: In-ear<br>
+                    Charging: Case included<br>
+                    Microphone: Included
+                </div>
+                <p><span class="price">₹1,799</span><span class="old-price">₹2,199</span></p>
+                <button onclick="addToCart('Wireless Earbuds')">Add to Cart</button>
+                <button onclick="showDetails('Wireless Earbuds', 'Bluetooth in-ear earbuds with a charging case and microphone. Battery life depends on the model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="audio">
+                <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=500&q=80" alt="Studio headphones">
+                <p><span class="discount">12% OFF</span></p>
+                <h3>Studio Headphones</h3>
+                <p>Over-ear headphones for editing, listening, and desk use.</p>
+                <p class="rating">★ ★ ★ ★ ★ (4.6)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Design: Over-ear<br>
+                    Connection: Wired<br>
+                    Use: Music and editing<br>
+                    Fit: Padded earcups
+                </div>
+                <p><span class="price">₹2,199</span><span class="old-price">₹2,499</span></p>
+                <button onclick="addToCart('Studio Headphones')">Add to Cart</button>
+                <button onclick="showDetails('Studio Headphones', 'Over-ear headphones with padded earcups for listening and editing. Exact audio specifications vary by model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=500&q=80" alt="Computer keyboard">
+                <p><span class="discount">15% OFF</span></p>
+                <h3>Mechanical Keyboard</h3>
+                <p>A practical keyboard for gaming and productivity.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.4)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Type: Mechanical-style<br>
+                    Connection: USB<br>
+                    Layout: Full-size style<br>
+                    Use: Gaming and work
+                </div>
+                <p><span class="price">₹2,499</span><span class="old-price">₹2,999</span></p>
+                <button onclick="addToCart('Mechanical Keyboard')">Add to Cart</button>
+                <button onclick="showDetails('Mechanical Keyboard', 'Keyboard for gaming and productivity. Switch type, layout, and lighting depend on the model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1527814050087-3793815479db?auto=format&fit=crop&w=500&q=80" alt="Wireless mouse">
+                <p><span class="discount">20% OFF</span></p>
+                <h3>Wireless Mouse</h3>
+                <p>Comfortable mouse for laptops, office work, and study.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.3)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Connection: Wireless<br>
+                    Sensor: Optical<br>
+                    Design: Ergonomic style<br>
+                    Use: Office and gaming
+                </div>
+                <p><span class="price">₹799</span><span class="old-price">₹999</span></p>
+                <button onclick="addToCart('Wireless Mouse')">Add to Cart</button>
+                <button onclick="showDetails('Wireless Mouse', 'Wireless optical mouse for laptops and desktop computers. Sensor resolution and connectivity depend on the model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=500&q=80" alt="Power bank">
+                <p><span class="discount">15% OFF</span></p>
+                <h3>Power Bank</h3>
+                <p>Portable backup power for compatible devices.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.2)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Type: Portable charger<br>
+                    Capacity: 10,000 mAh example<br>
+                    Charging: USB<br>
+                    Use: Travel and everyday
+                </div>
+                <p><span class="price">₹1,299</span><span class="old-price">₹1,499</span></p>
+                <button onclick="addToCart('Power Bank')">Add to Cart</button>
+                <button onclick="showDetails('Power Bank', 'Portable power bank. Capacity, charging speed, and port compatibility vary by model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="accessories">
+                <img src="https://images.unsplash.com/photo-1625842268584-8f3296236761?auto=format&fit=crop&w=500&q=80" alt="USB cable and adapter">
+                <p><span class="discount">10% OFF</span></p>
+                <h3>USB-C Accessories</h3>
+                <p>Useful charging and connection accessories for compatible devices.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.1)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Connector: USB-C example<br>
+                    Use: Charging and data<br>
+                    Compatibility: Device-dependent<br>
+                    Type: Cable or adapter
+                </div>
+                <p><span class="price">₹449</span><span class="old-price">₹499</span></p>
+                <button onclick="addToCart('USB-C Accessories')">Add to Cart</button>
+                <button onclick="showDetails('USB-C Accessories', 'USB-C cable or adapter for compatible devices. Supported charging speed and data transfer depend on the specific accessory.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="smart">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80" alt="Smartwatch">
+                <p><span class="discount">20% OFF</span></p>
+                <h3>Smartwatch</h3>
+                <p>View notifications and track everyday activity.</p>
+                <p class="rating">★ ★ ★ ★ ★ (4.6)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Display: Touchscreen<br>
+                    Features: Activity tracking<br>
+                    Connection: Bluetooth<br>
+                    Compatibility: Device-dependent
+                </div>
+                <p><span class="price">₹2,399</span><span class="old-price">₹2,999</span></p>
+                <button onclick="addToCart('Smartwatch')">Add to Cart</button>
+                <button onclick="showDetails('Smartwatch', 'Smartwatch with touchscreen, Bluetooth connectivity, and activity tracking. Features depend on the model.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="smart">
+                <img src="https://images.unsplash.com/photo-1558089687-f282ffcbc0d4?auto=format&fit=crop&w=500&q=80" alt="Smart home device">
+                <p><span class="discount">15% OFF</span></p>
+                <h3>Smart Home Device</h3>
+                <p>Explore connected-device convenience for your home.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.3)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Connectivity: Model-dependent<br>
+                    Control: Compatible app<br>
+                    Use: Smart home<br>
+                    Setup: Network required
+                </div>
+                <p><span class="price">₹1,699</span><span class="old-price">₹1,999</span></p>
+                <button onclick="addToCart('Smart Home Device')">Add to Cart</button>
+                <button onclick="showDetails('Smart Home Device', 'Example smart home product. App support, network requirements, and compatible platforms depend on the actual device.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="smart">
+                <img src="https://images.unsplash.com/photo-1608156639585-b3a032ef9689?auto=format&fit=crop&w=500&q=80" alt="Smart speaker">
+                <p><span class="discount">10% OFF</span></p>
+                <h3>Smart Speaker</h3>
+                <p>A connected speaker for compatible smart-home features.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.2)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Audio: Built-in speaker<br>
+                    Connection: Model-dependent<br>
+                    Control: Compatible app<br>
+                    Use: Home entertainment
+                </div>
+                <p><span class="price">₹2,699</span><span class="old-price">₹2,999</span></p>
+                <button onclick="addToCart('Smart Speaker')">Add to Cart</button>
+                <button onclick="showDetails('Smart Speaker', 'Connected speaker for home entertainment. Voice assistant support and connectivity depend on the specific product.')">View Details</button>
+            </div>
+
+            <div class="product" data-category="smart">
+                <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=500&q=80" alt="Smart security camera">
+                <p><span class="discount">18% OFF</span></p>
+                <h3>Smart Security Camera</h3>
+                <p>Explore connected camera options for home monitoring.</p>
+                <p class="rating">★ ★ ★ ★ ☆ (4.4)</p>
+                <div class="specs">
+                    <strong>Specifications</strong><br>
+                    Type: Smart camera<br>
+                    Connection: Model-dependent<br>
+                    Viewing: Compatible app<br>
+                    Storage: Model-dependent
+                </div>
+                <p><span class="price">₹2,299</span><span class="old-price">₹2,799</span></p>
+                <button onclick="addToCart('Smart Security Camera')">Add to Cart</button>
+                <button onclick="showDetails('Smart Security Camera', 'Example connected camera. Resolution, recording, storage, and remote-viewing options depend on the actual product.')">View Details</button>
+            </div>
+
+        </div>
+
+        <p id="cartMessage"></p>
+    </section>
+
+    <section id="comparison">
+        <h2>Product Comparison</h2>
+        <p>Compare example specifications before choosing a product.</p>
+
+        <div class="comparison">
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Everyday Laptop</th>
+                    <th>Gaming Laptop</th>
+                    <th>Premium Smartphone</th>
+                </tr>
+                <tr>
+                    <td>Processor</td>
+                    <td>Intel Core i5</td>
+                    <td>Intel Core i7</td>
+                    <td>Model-dependent</td>
+                </tr>
+                <tr>
+                    <td>RAM</td>
+                    <td>16 GB</td>
+                    <td>16 GB</td>
+                    <td>12 GB</td>
+                </tr>
+                <tr>
+                    <td>Storage</td>
+                    <td>512 GB SSD</td>
+                    <td>1 TB SSD</td>
+                    <td>256 GB</td>
+                </tr>
+                <tr>
+                    <td>Main Use</td>
+                    <td>Study and office</td>
+                    <td>Gaming and editing</td>
+                    <td>Communication and media</td>
+                </tr>
+                <tr>
+                    <td>Example Price</td>
+                    <td>₹52,999</td>
+                    <td>₹94,999</td>
+                    <td>₹39,999</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="offers">
+        <div class="offer">
+            <h2>Special Technology Offers</h2>
+            <p>Discover selected deals on laptops, smartphones, and accessories.</p>
+            <p><strong>Upgrade your setup with Vinland Electronics.</strong></p>
+            <a href="#products">
+                <button>Explore Offers</button>
+            </a>
+        </div>
+    </section>
+
+    <section class="details" id="details">
+        <h2>Product Details</h2>
+        <p>Select View Details on a product to learn more about its example specifications.</p>
+
+        <div class="detail-card">
+            <h3 id="detailTitle">Welcome to Vinland Electronics</h3>
+            <p id="detailDescription">Choose any product and select View Details. The selected product information will appear here.</p>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <h2>Customer Reviews</h2>
+
+        <div class="review">
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>"A well-organized collection with useful product specifications."</p>
+            <strong>— Shalom</strong>
+        </div>
+
+        <div class="review">
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>"I like the clean design and the product comparison table."</p>
+            <strong>— Prasad</strong>
+        </div>
+
+        <div class="review">
+            <p>⭐⭐⭐⭐⭐</p>
+            <p>"A convenient way to explore electronics and accessories."</p>
+            <strong>— Siva Sai </strong>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Have questions about a product? Send us a message.</p>
+
+        <form id="contactForm">
+            <label for="customerName">Your Name</label>
+            <input type="text" id="customerName" placeholder="Enter your name" required>
+
+            <label for="customerEmail">Email Address</label>
+            <input type="email" id="customerEmail" placeholder="Enter your email" required>
+
+            <label for="customerMessage">Your Message</label>
+            <textarea id="customerMessage" rows="4" placeholder="What would you like to know?" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+
+        <p id="contactMessage"></p>
+        <p>Email: support@Nexland.example</p>
+        <p>Phone: +91 98765 43210</p>
+    </section>
+
+    <footer>
+        <h3>Vinland Electronics</h3>
+        <p>Smart Technology • Premium Quality • Great Prices</p>
+        <p>Explore laptops, smartphones, audio, and smart devices.</p>
+        <p class="footer-line">© 2026 Vinland Electronics. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
